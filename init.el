@@ -2,9 +2,6 @@
 
 ;;; Commentary:
 
-;;; Code:
-
-(add-to-list 'load-path "~/.emacs.d/")
 
 ;; Package Manager
 ;; See ~Cask~ file for its configuration
@@ -61,6 +58,18 @@
 
 ;; make tab key do indent first then completion.
 (setq-default tab-always-indent 'complete)
+
+;; Java mode
+(add-hook 'java-mode-hook
+              (lambda ()
+                "Treat Java 1.5 @-style annotations as comments."
+                (setq c-comment-start-regexp "(@|/(/|[*][*]?))")
+                (modify-syntax-entry ?@ "< b" java-mode-syntax-table)))
+(add-hook 'java-mode-hook (lambda ()
+                               (setq c-basic-offset 4
+                                     tab-width 4
+                                     indent-tabs-mode t)))
+
 
 (provide 'init)
 ;;; init.el ends here
